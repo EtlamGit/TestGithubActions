@@ -43,6 +43,7 @@ jobs:
     - name: Create BUILD folder
       run: |
         mkdir ../build
+        ls -hals ${{ runner.workspace }}
     
     - name: qmake
       working-directory: ../build
