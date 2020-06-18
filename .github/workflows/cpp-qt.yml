@@ -48,12 +48,11 @@ jobs:
       working-directory: ../build
       run: qmake ${{ github.workspace }}/EasyGrblSetup.pro
     
-    - name: LD_LIBRARY_PATH
-      if: matrix.os == 'ubuntu-16.04'
-      run: export LD_LIBRARY_PATH=${{ runner.workspace }}/Qt/5.5/gcc_64/lib
-
     - name: make
       working-directory: ../build
+      if: matrix.os == 'ubuntu-16.04'
+      env:
+        LD_LIBRARY_PATH: ${{ runner.workspace }}/Qt/5.5/gcc_64/lib
       run: |
         printenv
         make
