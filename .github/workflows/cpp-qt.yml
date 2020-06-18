@@ -51,6 +51,7 @@ jobs:
     - name: make
       working-directory: ../build
       run: |
+        printenv
         make
         ls -hals
     
