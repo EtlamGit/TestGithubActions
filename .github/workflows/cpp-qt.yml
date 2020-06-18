@@ -43,7 +43,6 @@ jobs:
     - name: Create BUILD folder
       run: |
         mkdir ../build
-        ls -Rhals ${{ runner.workspace }}
     
     - name: qmake
       working-directory: ../build
@@ -52,6 +51,7 @@ jobs:
     - name: make
       working-directory: ../build
       run: |
+        export ${{ runner.workspace }}LD_LIBRARY_PATH=${{ runner.workspace }}/Qt/5.5/gcc_64/lib
         printenv
         make
         ls -hals
