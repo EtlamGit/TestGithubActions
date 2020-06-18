@@ -1,0 +1,38 @@
+name: Ubuntu 16.04
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: [ubuntu-16.04]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Qt
+      run: apt-get install qt5-default
+
+    - name: Create BUILD folder
+      run: |
+        mkdir ../build
+    
+    - name: qmake
+      working-directory: ../build
+      run: qmake ${{ github.workspace }}/EasyGrblSetup.pro
+    
+    - name: make
+      working-directory: ../build
+      run: |
+        make
+        ls -hals
+    
+    - name: Archive build result
+      uses: actions/upload-artifact@v2
+      with:
+        name: Ubuntu 16.04 Binary
+        path: ${{ runner.workspace }}/build/EasyGrblSetup
