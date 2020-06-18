@@ -48,7 +48,7 @@ jobs:
       working-directory: ../build
       run: qmake ${{ github.workspace }}/EasyGrblSetup.pro
     
-    - name: make (Ubuntu-16.04)
+    - name: make
       working-directory: ../build
       if: matrix.os == 'ubuntu-16.04'
       env:
@@ -58,7 +58,7 @@ jobs:
       working-directory: ../build
       if: matrix.os != 'ubuntu-16.04'
       run: make
-    
+   
     - name: Archive build result
       uses: actions/upload-artifact@v2
       with:
