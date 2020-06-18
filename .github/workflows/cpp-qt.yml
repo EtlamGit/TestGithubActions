@@ -23,8 +23,6 @@ jobs:
             qtversion: '5.12.8'
           - os: macos-latest
             qtversion: '5.12.8'
-          - os: macos-latest
-            qtversion: '5.15.0'
 
     steps:
     - uses: actions/checkout@v2
@@ -40,7 +38,6 @@ jobs:
       uses: jurplel/install-qt-action@v2
       with:
         version: ${{ matrix.qtversion }}
-        host: 'linux'
         target: 'desktop'
         cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
