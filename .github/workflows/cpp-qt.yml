@@ -48,14 +48,13 @@ jobs:
       working-directory: ../build
       run: qmake ${{ github.workspace }}/EasyGrblSetup.pro
     
+    - name: Environment (Ubuntu-16.04)
+      if: matrix.os == 'ubuntu-16.04'
+      run: echo '::set-env name=LD_LIBRARY_PATH::${{ runner.workspace }}/Qt/5.5/gcc_64/lib'
+
     - name: make
       working-directory: ../build
-      run: |
-        if [ "$MATRIX_OS" == "ubuntu-16.04" ]; then
-          LD_LIBRARY_PATH=${{ runner.workspace }}/Qt/5.5/gcc_64/lib
-        fi
-        make
-      shell: bash
+      run: make
    
     - name: Archive build result
       uses: actions/upload-artifact@v2
