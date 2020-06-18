@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-16.04, ubuntu-18.04, ubuntu-20.04]
+        os: [ubuntu-16.04, ubuntu-18.04, ubuntu-20.04, macos-latest]
         include:
           - os: ubuntu-16.04
             qtversion: '5.5'
@@ -21,6 +21,10 @@ jobs:
             qtversion: '5.9.5'
           - os: ubuntu-20.04
             qtversion: '5.12.8'
+          - os: macos-latest
+            qtversion: '5.12.8'
+          - os: macos-latest
+            qtversion: '5.15.0'
 
     steps:
     - uses: actions/checkout@v2
