@@ -15,13 +15,13 @@ jobs:
       matrix:
         name: [ubuntu-16.04, ubuntu-18.04, ubuntu-20.04, macos-5.9, macos-5.12, windows-5.9, windows-5.12]
         include:
-          - name: ubuntu-18.04
+          - name: ubuntu-16.04
             os: ubuntu-16.04
             qt: '5.5'
           - name: ubuntu-18.04
             os: ubuntu-18.04
             qt: '5.9.5'
-          - name: ubuntu-18.04
+          - name: ubuntu-20.04
             os: ubuntu-20.04
             qt: '5.12.8'
           - name: macos-5.9
