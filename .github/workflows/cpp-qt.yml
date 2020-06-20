@@ -1,4 +1,4 @@
-name: C++ Qt Ubuntu CI
+name: C++ Qt CI
 
 on:
   push:
@@ -13,16 +13,29 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-16.04, ubuntu-18.04, ubuntu-20.04, macos-latest]
+        name: [ubuntu-16.04, ubuntu-18.04, ubuntu-20.04, macos-5.9, macos-5.12, windows-5.9, windows-5.12]
         include:
-          - os: ubuntu-16.04
-            qtversion: '5.5'
-          - os: ubuntu-18.04
-            qtversion: '5.9.5'
-          - os: ubuntu-20.04
-            qtversion: '5.12.8'
-          - os: macos-latest
-            qtversion: '5.12.8'
+          - name: ubuntu-18.04
+            os: ubuntu-16.04
+            qt: '5.5'
+          - name: ubuntu-18.04
+            os: ubuntu-18.04
+            qt: '5.9.5'
+          - name: ubuntu-18.04
+            os: ubuntu-20.04
+            qt: '5.12.8'
+          - name: macos-5.9
+            os: macos-latest
+            qt: '5.9.9'
+          - name: macos-5.12
+            os: macos-latest
+            qt: '5.12.8'
+          - name: windows-5.9
+            os: windows-latest
+            qt: '5.9.9'
+          - name: windows-5.12
+            os: windows-latest
+            qt: '5.12.8'
 
     steps:
     - uses: actions/checkout@v2
@@ -32,12 +45,12 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ${{ runner.workspace }}/Qt
-        key: ${{ runner.os }}-QtCache-${{ matrix.qtversion }}
+        key: ${{ runner.os }}-QtCache-${{ matrix.qt }}
 
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
-        version: ${{ matrix.qtversion }}
+        version: ${{ matrix.qt }}
         target: 'desktop'
         cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
@@ -60,5 +73,5 @@ jobs:
     - name: Archive build result
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ matrix.os }} Binary
+        name: Binary ${{ matrix.name }}
         path: ${{ runner.workspace }}/build/EasyGrblSetup
