@@ -67,10 +67,6 @@ jobs:
       run: |
         mkdir ../build
     
-#    - name: Environment (Ubuntu-16.04)
-#      if: matrix.os == 'ubuntu-16.04'
-#      run: echo '::set-env name=LD_LIBRARY_PATH::${{ runner.workspace }}/Qt/5.5/gcc_64/lib'
-
     - name: Build (Windows)
       if: matrix.os == 'windows-latest'
       working-directory: ../build
@@ -79,6 +75,7 @@ jobs:
         call ${{ matrix.vcvars }}
         qmake ${{ github.workspace }}/EasyGrblSetup.pro
         nmake
+        dir /s ..
   
     - name: Build (others)
       if: matrix.os != 'windows-latest'
