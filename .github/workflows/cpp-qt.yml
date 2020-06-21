@@ -78,9 +78,9 @@ jobs:
       run: |
         call ${{ matrix.vcvars }}
         qmake ${{ github.workspace }}/EasyGrblSetup.pro
-        make
+        nmake
   
-    - name: Build (Linux)
+    - name: Build (others)
       if: matrix.os != 'windows-latest'
       working-directory: ../build
       run: |
