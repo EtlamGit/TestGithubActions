@@ -39,12 +39,12 @@ jobs:
             os: windows-latest
             qt: '5.9.9'
             vcvars: '"C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvarsall.bat" x64 -vcvars_ver=14.16'
-            artifact: EasyGrblSetup.exe
+            artifact: release/EasyGrblSetup.exe
           - name: windows-5.12
             os: windows-latest
             qt: '5.12.8'
             vcvars: '"C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvarsall.bat" x64 -vcvars_ver=14.16'
-            artifact: EasyGrblSetup.exe
+            artifact: release/EasyGrblSetup.exe
 
     steps:
     - uses: actions/checkout@v2
@@ -75,7 +75,6 @@ jobs:
         call ${{ matrix.vcvars }}
         qmake ${{ github.workspace }}/EasyGrblSetup.pro
         nmake
-        dir /s ..
   
     - name: Build (others)
       if: matrix.os != 'windows-latest'
@@ -84,6 +83,7 @@ jobs:
         qmake ${{ github.workspace }}/EasyGrblSetup.pro
         make
       env:
+        # only needed for Ubuntu-16.04
         LD_LIBRARY_PATH: '${{ runner.workspace }}/Qt/5.5/gcc_64/lib'
    
     - name: Archive build result
