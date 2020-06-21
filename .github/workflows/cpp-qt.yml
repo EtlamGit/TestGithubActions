@@ -67,24 +67,27 @@ jobs:
       run: |
         mkdir ../build
     
-    - name: Environment (Ubuntu-16.04)
-      if: matrix.os == 'ubuntu-16.04'
-      run: echo '::set-env name=LD_LIBRARY_PATH::${{ runner.workspace }}/Qt/5.5/gcc_64/lib'
+#    - name: Environment (Ubuntu-16.04)
+#      if: matrix.os == 'ubuntu-16.04'
+#      run: echo '::set-env name=LD_LIBRARY_PATH::${{ runner.workspace }}/Qt/5.5/gcc_64/lib'
 
-    - name: Environment (Windows)
+    - name: Build (Windows)
       if: matrix.os == 'windows-latest'
-      shell: cmd
-      run: call "${{ matrix.vcvars }}"
-  
-    - name: qmake
       working-directory: ../build
-      run: qmake ${{ github.workspace }}/EasyGrblSetup.pro
-    
-    - name: make
+      shell: cmd
+      run: |
+        call "${{ matrix.vcvars }}"
+        qmake ${{ github.workspace }}/EasyGrblSetup.pro
+        make
+  
+    - name: Build (Linux)
+      if: matrix.os != 'windows-latest'
       working-directory: ../build
       run: |
+        qmake ${{ github.workspace }}/EasyGrblSetup.pro
         make
-        ls -Rhals
+      env:
+        LD_LIBRARY_PATH: '${{ runner.workspace }}/Qt/5.5/gcc_64/lib'
    
     - name: Archive build result
       uses: actions/upload-artifact@v2
