@@ -63,8 +63,8 @@ jobs:
         cp ..\build\release\EasyGrblSetup.exe ..\deploy\EasyGrblSetup.exe
         windeployqt ..\deploy
         dir /S ..\deploy
-        echo %QTDIR%
-        dir /S %QTDIR%
+        echo Test
+        dir /S D:\a\TestGithubActions\Qt\5.9.9\
 
     - name: Archive build result
       uses: actions/upload-artifact@v2
