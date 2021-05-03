@@ -46,20 +46,25 @@ jobs:
     - name: Create BUILD folder
       run: |
         mkdir ../build
+        mkdir ../deploy
     
     - name: Build (Windows)
-      if: matrix.os == 'windows-latest'
       working-directory: ../build
       shell: cmd
       run: |
         call ${{ matrix.vcvars }}
         qmake ${{ github.workspace }}/EasyGrblSetup.pro
         nmake
-        mkdir ..\deploy
+
+    - name: Deploy (Windows)
+      working-directory: ../build
+      shell: cmd
+      run: |
         cp ..\build\release\EasyGrblSetup.exe ..\deploy\EasyGrblSetup.exe
         windeployqt ..\deploy
-        echo Test
         dir /S ..\deploy
+        echo %QTDIR%
+        dir /S %QTDIR%
 
     - name: Archive build result
       uses: actions/upload-artifact@v2
