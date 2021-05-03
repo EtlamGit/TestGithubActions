@@ -72,7 +72,9 @@ jobs:
         qmake ${{ github.workspace }}/EasyGrblSetup.pro
         nmake
         mkdir ../deploy
-        windeployqt ../build -dir ../deploy
+        cp ../build/release/EasyGrblSetup.exe ../deploy/
+        windeployqt ../build/release/EasyGrblSetup.exe
+        dir /S "C:/Qt/"
 
     - name: Build (others)
       if: matrix.os != 'windows-latest'
