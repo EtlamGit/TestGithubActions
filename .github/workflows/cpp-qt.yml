@@ -74,7 +74,10 @@ jobs:
         mkdir ..\deploy
         cp ..\build\release\EasyGrblSetup.exe ..\deploy\EasyGrblSetup.exe
         windeployqt ..\build\release\EasyGrblSetup.exe
-        dir /S C:\Qt\
+        echo Test
+        dir ..\deploy
+        dir /S D:\
+        dir /S C:\
 
     - name: Build (others)
       if: matrix.os != 'windows-latest'
