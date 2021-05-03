@@ -57,9 +57,9 @@ jobs:
         nmake
         mkdir ..\deploy
         cp ..\build\release\EasyGrblSetup.exe ..\deploy\EasyGrblSetup.exe
-        windeployqt ..\build\release\EasyGrblSetup.exe
+        windeployqt ..\deploy
         echo Test
-        dir /S ..\deploy\
+        dir /S ..\deploy
 
     - name: Archive build result
       uses: actions/upload-artifact@v2
