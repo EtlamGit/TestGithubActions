@@ -64,7 +64,7 @@ jobs:
         windeployqt ..\deploy
         dir /S ..\deploy
         echo Test
-        dir /S D:\a\TestGithubActions\Qt\5.9.9\
+        dir /S D:\a\TestGithubActions\Qt\5.*.*\
 
     - name: Archive build result
       uses: actions/upload-artifact@v2
