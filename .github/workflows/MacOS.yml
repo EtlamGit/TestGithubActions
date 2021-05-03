@@ -24,7 +24,7 @@ jobs:
             qt: '5.12.10'
             artifact: EasyGrblSetup.app
 
-  steps:
+    steps:
     - uses: actions/checkout@v2
 
     - name: Cache Qt
