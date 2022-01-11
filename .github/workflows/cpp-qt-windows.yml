@@ -22,7 +22,7 @@ jobs:
             artifact: release/EasyGrblSetup.exe
           - name: windows-5.12
             os: windows-latest
-            qt: '5.12.10'
+            qt: '5.12.12'
             vcvars: '"C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvarsall.bat" x64 -vcvars_ver=14.16'
             artifact: release/EasyGrblSetup.exe
 
