@@ -17,11 +17,11 @@ jobs:
         include:
           - name: ubuntu-18.04
             os: ubuntu-18.04
-            qt: '5.9.5'
+            qt: '5.9.9'
             artifact: EasyGrblSetup
           - name: ubuntu-20.04
             os: ubuntu-20.04
-            qt: '5.12.8'
+            qt: '5.12.12'
             artifact: EasyGrblSetup
 
     steps:
