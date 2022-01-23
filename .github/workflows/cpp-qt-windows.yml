@@ -26,6 +26,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - uses: ilammy/msvc-dev-cmd@v1
 
     - name: Cache Qt
       id: cache-qt
@@ -48,7 +49,6 @@ jobs:
         mkdir ../deploy
     
     - name: Build (Windows)
-      uses: ilammy/msvc-dev-cmd@v1
       working-directory: ../build
       shell: cmd
       run: |
