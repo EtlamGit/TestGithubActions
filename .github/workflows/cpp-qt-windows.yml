@@ -18,12 +18,12 @@ jobs:
           - name: windows-5.9
             os: windows-latest
             qt: '5.9.9'
-            vcvars: '"C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvarsall.bat" x64 -vcvars_ver=14.16'
+            vcvars: '"C:/Program Files (x86)/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvarsall.bat" x64 -vcvars_ver=14.29'
             artifact: release/EasyGrblSetup.exe
           - name: windows-5.12
             os: windows-latest
             qt: '5.12.12'
-            vcvars: '"C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvarsall.bat" x64 -vcvars_ver=14.16'
+            vcvars: '"C:/Program Files (x86)/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvarsall.bat" x64 -vcvars_ver=14.29'
             artifact: release/EasyGrblSetup.exe
 
     steps:
