@@ -64,11 +64,9 @@ jobs:
         cp ..\build\release\EasyGrblSetup.exe ..\deploy\EasyGrblSetup.exe
         windeployqt ..\deploy
         dir /S ..\deploy
-        echo Test
-        dir /S D:\a\TestGithubActions\Qt
 
     - name: Archive build result
       uses: actions/upload-artifact@v2
       with:
         name: Binary ${{ matrix.name }}
-        path: ${{ runner.workspace }}/build/${{ matrix.artifact }}
+        path: ${{ runner.workspace }}/deploy/*
