@@ -17,29 +17,16 @@ jobs:
         include:
           - name: ubuntu-18.04
             os: ubuntu-18.04
-            qt: '5.9.9'
             artifact: EasyGrblSetup
           - name: ubuntu-20.04
             os: ubuntu-20.04
-            qt: '5.12.12'
             artifact: EasyGrblSetup
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Cache Qt
-      id: cache-qt
-      uses: actions/cache@v2
-      with:
-        path: ${{ runner.workspace }}/Qt
-        key: ${{ runner.os }}-QtCache-${{ matrix.qt }}
-
     - name: Install Qt
-      uses: jurplel/install-qt-action@v2
-      with:
-        version: ${{ matrix.qt }}
-        target: 'desktop'
-        cached: ${{ steps.cache-qt.outputs.cache-hit }}
+      run: sudo apt-get update && apt-get install qt5-default -y
 
     - name: Create BUILD folder
       run: |
