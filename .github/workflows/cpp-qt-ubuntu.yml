@@ -28,7 +28,7 @@ jobs:
     - name: Install Qt
       run: |
         sudo apt-get update
-        sudo apt-get install qt5-default libqt5serialport5 -y
+        sudo apt-get install qt5-default libqt5serialport5 libqt5serialport5-dev -y
 
     - name: Create BUILD folder
       run: |
