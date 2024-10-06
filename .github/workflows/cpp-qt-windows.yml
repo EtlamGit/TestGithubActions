@@ -70,7 +70,7 @@ jobs:
         cp ..\build\release\EasyGrblSetup.exe ..\deploy\EasyGrblSetup.exe
         windeployqt ..\deploy
         dir /S ..\deploy
-        # todo: we have to add OpenSSL DLLs here
+# todo: we have to add OpenSSL DLLs here
 
     - name: Archive build result
       uses: actions/upload-artifact@v3
