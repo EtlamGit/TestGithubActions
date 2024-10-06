@@ -46,7 +46,7 @@ jobs:
       with:
         version: ${{ matrix.qt }}
         target: 'desktop'
-        tools: 'tools_openssl_x64,1.1.1-10,qt.tools.openssl.win_x64'
+        tools: 'tools_openssl_x64,1.1.1-10'
         cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
     - name: Create BUILD folder
