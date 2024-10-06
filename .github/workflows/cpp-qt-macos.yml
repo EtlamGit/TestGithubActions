@@ -62,7 +62,7 @@ jobs:
     - name: Deploy Qt (macOS)
       working-directory: ../build
       run: |
-        macdeployqt minutor.app -codesign=- -dmg
+        macdeployqt ${{ matrix.artifact }} -codesign=- -dmg
 
     - name: Archive build result
       uses: actions/upload-artifact@v4
