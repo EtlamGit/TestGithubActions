@@ -17,7 +17,7 @@ jobs:
         name: [macos-5.9, macos-5.12, macos-5.15]
         include:
           - name: macos-5.9
-            os: macos-11
+            os: macos-12
             qt: '5.9.9'
             artifact: EasyGrblSetup.app
           - name: macos-5.12
