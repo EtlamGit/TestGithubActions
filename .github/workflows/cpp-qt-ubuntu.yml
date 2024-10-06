@@ -8,6 +8,9 @@ on:
   workflow_dispatch:
     branches: [ master ]
 
+env:
+  project: 'EasyGrblSetup'
+
 jobs:
   build:
 
@@ -18,13 +21,10 @@ jobs:
         include:
           - name: ubuntu-20.04
             os: ubuntu-20.04
-            artifact: EasyGrblSetup
           - name: ubuntu-22.04
             os: ubuntu-22.04
-            artifact: EasyGrblSetup
           - name: ubuntu-24.04
             os: ubuntu-24.04
-            artifact: EasyGrblSetup
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -33,7 +33,7 @@ jobs:
     - name: Install Qt
       run: |
         sudo apt-get update
-        sudo apt-get install qt5-default libqt5serialport5 libqt5serialport5-dev -y
+        sudo apt-get install qtbase5-dev qt5-qmake qtbase5-dev-tools libqt5serialport5 libqt5serialport5-dev -y
 
     - name: Create BUILD folder
       run: |
@@ -42,11 +42,11 @@ jobs:
     - name: Build (Ubuntu)
       working-directory: ../build
       run: |
-        qmake ${{ github.workspace }}/${{ matrix.artifact }}.pro
+        qmake ${{ github.workspace }}/${{ env.project }}.pro
         make
 
     - name: Archive build result
       uses: actions/upload-artifact@v4
       with:
         name: Binary ${{ matrix.name }}
-        path: ${{ runner.workspace }}/build/${{ matrix.artifact }}
+        path: ${{ runner.workspace }}/build/${{ env.project }}
