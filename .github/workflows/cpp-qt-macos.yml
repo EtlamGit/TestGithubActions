@@ -9,33 +9,37 @@ on:
 jobs:
   build:
 
-    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        name: [macos-5.9, macos-5.12]
+        name: [macos-5.9, macos-5.12, macos-5.15]
         include:
           - name: macos-5.9
-            os: macos-latest
+            os: macos-11
             qt: '5.9.9'
             artifact: EasyGrblSetup.app
           - name: macos-5.12
-            os: macos-latest
+            os: macos-12
             qt: '5.12.12'
             artifact: EasyGrblSetup.app
+          - name: macos-5.15
+            os: macos-latest
+            qt: '5.15.2'
+            artifact: EasyGrblSetup.app
+    runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Cache Qt
       id: cache-qt
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ${{ runner.workspace }}/Qt
         key: ${{ runner.os }}-QtCache-${{ matrix.qt }}
 
     - name: Install Qt
-      uses: jurplel/install-qt-action@v2
+      uses: jurplel/install-qt-action@v3
       with:
         version: ${{ matrix.qt }}
         target: 'desktop'
@@ -44,15 +48,20 @@ jobs:
     - name: Create BUILD folder
       run: |
         mkdir ../build
-    
+
     - name: Build (MacOS)
       working-directory: ../build
       run: |
-        qmake ${{ github.workspace }}/EasyGrblSetup.pro
+        qmake ${{ github.workspace }}/EasyGrblSetup.pro -early QMAKE_DEFAULT_LIBDIRS=$(xcrun -show-sdk-path)/usr/lib
         make
-   
+
+    - name: Deploy Qt (macOS)
+      working-directory: ../build
+      run: |
+        macdeployqt minutor.app -codesign=- -dmg
+
     - name: Archive build result
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Binary ${{ matrix.name }}
         path: ${{ runner.workspace }}/build/${{ matrix.artifact }}
