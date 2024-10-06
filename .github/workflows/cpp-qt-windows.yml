@@ -29,7 +29,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: ilammy/msvc-dev-cmd@v1
       with:
         toolset: 14.29
@@ -73,7 +73,7 @@ jobs:
 # todo: we have to add OpenSSL DLLs here
 
     - name: Archive build result
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Binary ${{ matrix.name }}
         path: ${{ runner.workspace }}/deploy/*
