@@ -27,7 +27,7 @@ jobs:
           - name: windows-5.15
             os: windows-latest
             qt: '5.15.2'
-            msvc_toolset: '14.39'
+            msvc_toolset: '14.29'
     runs-on: ${{ matrix.os }}
 
     steps:
